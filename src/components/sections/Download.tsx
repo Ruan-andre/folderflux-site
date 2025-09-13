@@ -68,8 +68,8 @@ const Download = () => {
           Versão {releaseInfo?.tag_name} | Lançado em{" "}
           {new Date(releaseInfo?.published_at ?? "").toLocaleDateString("pt-BR")}
         </Typography>
-        <Grid container spacing={4} sx={{ mt: 2 }} justifyContent="center" alignItems="stretch" columns={12}>
-          <Grid sx={{ flex: 1, display: 'flex' }}>
+        <Grid container spacing={4} sx={{ mt: 2 }} justifyContent="center" alignItems="stretch">
+          <Grid size={{xs:12, md:6}}  sx={{ display: 'flex', mb: { xs: 2, md: 0 } }}>
             <Card
               sx={{
                 bgcolor: "#23243a",
@@ -83,7 +83,10 @@ const Download = () => {
               }}
             >
               <CardContent sx={{ textAlign: "center", flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <Typography variant="h4" sx={{ color: "#3a7bd5", fontWeight: 700 }}>
+                <Typography 
+                  variant="h4" 
+                  sx={{ color: "#3a7bd5", fontWeight: 700, fontSize: { xs: 24, md: 32 } }}
+                >
                   Windows
                 </Typography>
                 <DownloadButton fullWidth href={getAssetUrl("setup")} sx={{ mt: 2 }}>
@@ -101,7 +104,7 @@ const Download = () => {
             </Card>
           </Grid>
           {/* Card Linux */}
-          <Grid sx={{ flex: 1, display: 'flex' }}>
+          <Grid size={{ xs: 12, md: 6 }} sx={{ display: 'flex' }}>
             <Card sx={{
                 bgcolor: "#23243a",
                 border: "1.5px solid #00c9a7",
@@ -113,7 +116,10 @@ const Download = () => {
                 flex: 1,
               }}>
               <CardContent sx={{ textAlign: "center", flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <Typography variant="h4" sx={{ color: "#00c9a7", fontWeight: 700 }}>
+                <Typography 
+                  variant="h4" 
+                  sx={{ color: "#00c9a7", fontWeight: 700, fontSize: { xs: 24, md: 32 } }}
+                >
                   Linux
                 </Typography>
                 <DownloadButton
