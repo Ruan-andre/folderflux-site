@@ -13,7 +13,7 @@ export default function Footer() {
             <Typography variant="caption" sx={{ color: '#b0b0c3', mt: 0.5 }}>GitHub</Typography>
           </Link>
           {/* Portfólio */}
-          <Link title='Portfólio' href="https://a-ruan-portfolio.vercel.app/" target="_blank" aria-label="Portfólio" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.15)' } }}>
+          <Link title='Portfólio' href="https://andreruan.dev/" target="_blank" aria-label="Portfólio" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.15)' } }}>
             <Image src="/icon-portfólio.ico" alt="Portfólio" width={32} height={32} style={{ borderRadius: 4 }} />
             <Typography variant="caption" sx={{ color: '#b0b0c3', mt: 0.5 }}>Portfólio</Typography>
           </Link>
