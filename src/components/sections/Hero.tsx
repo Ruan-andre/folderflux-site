@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Container, Typography } from "@mui/material";
-import DownloadButton from "./DownloadButton";
+import DownloadButton from "../DownloadButton";
 import { useReleaseInfo } from "../../contexts/ReleaseInfoContext";
 
 import type { ReleaseInfo } from "../../contexts/ReleaseInfoContext";
@@ -44,7 +44,7 @@ export default function Hero() {
         py: { xs: 8, md: 14 },
         color: "#f3f3f3",
         textAlign: "center",
-        borderRadius: 6,
+        borderRadius: "0 0 24px 24px",
         boxShadow: 4,
         mb: 6,
       }}

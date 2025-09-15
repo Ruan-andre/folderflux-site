@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Box, Link } from "@mui/material";
 
-import DownloadButton from "./DownloadButton";
+import DownloadButton from "../DownloadButton";
 import { useReleaseInfo } from "../../contexts/ReleaseInfoContext";
 import type { ReleaseInfo } from "../../contexts/ReleaseInfoContext";
 

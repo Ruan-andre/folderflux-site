@@ -1,5 +1,5 @@
 
-import { Box, Divider } from '@mui/material';
+import { Box } from '@mui/material';
 import Header from '../components/sections/Header';
 import Hero from '../components/sections/Hero';
 import Features from '../components/sections/Features';
@@ -16,7 +16,6 @@ export default function HomePage() {
       </header>
       <main>
         <Features />
-        <Divider />
         <Download />
         <Donation />
       </main>

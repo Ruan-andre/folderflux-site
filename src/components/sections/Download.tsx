@@ -1,7 +1,7 @@
 "use client";
-import { Box, Button, Card, CardContent, CircularProgress, Container, Grid, Typography } from "@mui/material";
-import DownloadButton from "./DownloadButton";
+import { Box, CircularProgress, Container, Grid, Typography } from "@mui/material";
 import { useReleaseInfo } from "../../contexts/ReleaseInfoContext";
+import { DownloadCard } from "../DownloadCard";
 
 const Download = () => {
   const { releaseInfo, loading, error } = useReleaseInfo();
@@ -49,7 +49,7 @@ const Download = () => {
     <Container id="download" maxWidth="md" sx={{ py: 8, mb: 6 }}>
       <Box
         sx={{
-          bgcolor: "linear-gradient(135deg, #23243a 0%, #1a1b2b 100%)",
+          background: "linear-gradient(135deg, #23243a 0%, #1a1b2b 100%)",
           borderRadius: 6,
           boxShadow: 3,
           p: { xs: 3, md: 5 },
@@ -69,76 +69,13 @@ const Download = () => {
           {new Date(releaseInfo?.published_at ?? "").toLocaleDateString("pt-BR")}
         </Typography>
         <Grid container spacing={4} sx={{ mt: 2 }} justifyContent="center" alignItems="stretch">
-          <Grid size={{xs:12, md:6}}  sx={{ display: 'flex', mb: { xs: 2, md: 0 } }}>
-            <Card
-              sx={{
-                bgcolor: "#23243a",
-                border: "1.5px solid #3a7bd5",
-                borderRadius: 4,
-                boxShadow: 2,
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                flex: 1,
-              }}
-            >
-              <CardContent sx={{ textAlign: "center", flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <Typography 
-                  variant="h4" 
-                  sx={{ color: "#3a7bd5", fontWeight: 700, fontSize: { xs: 24, md: 32 } }}
-                >
-                  Windows
-                </Typography>
-                <DownloadButton fullWidth href={getAssetUrl("setup")} sx={{ mt: 2 }}>
-                  Baixar Instalador (.exe)
-                </DownloadButton>
-                <Button
-                  variant="outlined"
-                  sx={{ mt: 1, borderColor: "#3a7bd5", color: "#3a7bd5", fontWeight: 700 }}
-                  fullWidth
-                  href={getAssetUrl("portable")}
-                >
-                  Versão Portátil (.exe)
-                </Button>
-              </CardContent>
-            </Card>
+          <Grid size={{ xs: 12, md: 6 }} sx={{ display: 'flex', mb: { xs: 2, md: 0 } }}>
+            <DownloadCard title="Windows" titleColor="#3a7bd5" borderColor="#3a7bd5" mainButtonLabel="Baixar Instalador" mainButtonHref={getAssetUrl("setup")}
+              secondaryButtonLabel="Versão Portátil (.exe)" secondaryButtonHref={getAssetUrl("portable")} />
           </Grid>
-          {/* Card Linux */}
           <Grid size={{ xs: 12, md: 6 }} sx={{ display: 'flex' }}>
-            <Card sx={{
-                bgcolor: "#23243a",
-                border: "1.5px solid #00c9a7",
-                borderRadius: 4,
-                boxShadow: 2,
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                flex: 1,
-              }}>
-              <CardContent sx={{ textAlign: "center", flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <Typography 
-                  variant="h4" 
-                  sx={{ color: "#00c9a7", fontWeight: 700, fontSize: { xs: 24, md: 32 } }}
-                >
-                  Linux
-                </Typography>
-                <DownloadButton
-                  fullWidth
-                  href={getAssetUrl("appimage")}
-                  sx={{ mt: 2, background: "linear-gradient(90deg, #00c9a7 0%, #23243a 100%)" }}
-                >
-                  Baixar (.AppImage)
-                </DownloadButton>
-                <Button
-                  variant="outlined"
-                  sx={{ mt: 1, borderColor: "#00c9a7", color: "#00c9a7", fontWeight: 700 }}
-                  fullWidth
-                 href={getAssetUrl("deb")}
-                >
-                  Outros formatos (.deb)
-                </Button>
-              </CardContent>
-            </Card>
+            <DownloadCard title="Linux" titleColor="#00c9a7" borderColor="#00c9a7" mainButtonLabel="Baixar (.AppImage)" mainButtonHref={getAssetUrl("appimage")}
+              secondaryButtonLabel="Outros formatos (.deb)" secondaryButtonHref={getAssetUrl("deb")} />
           </Grid>
         </Grid>
       </Box>
