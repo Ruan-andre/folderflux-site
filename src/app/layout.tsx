@@ -1,5 +1,6 @@
 import { ReleaseInfoProvider } from '@/contexts/ReleaseInfoContext';
 import ThemeRegistry from '../components/ThemeRegistry';
+import { Analytics } from "@vercel/analytics/next"
 import './globals.css';
 
 export const metadata = {
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </ReleaseInfoProvider>
         </ThemeRegistry>
+        <Analytics />
       </body>
     </html>
   );
