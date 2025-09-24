@@ -1,23 +1,8 @@
 "use client";
 
+import ReleaseInfoContextType from "@/interfaces/ReleaseContextType";
+import ReleaseInfo from "@/interfaces/ReleaseInfo";
 import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
-
-export interface ReleaseAsset {
-  name: string;
-  browser_download_url: string;
-}
-
-export interface ReleaseInfo {
-  tag_name: string;
-  published_at: string;
-  assets: ReleaseAsset[];
-}
-
-interface ReleaseInfoContextType {
-  releaseInfo: ReleaseInfo | null;
-  loading: boolean;
-  error: string | null;
-}
 
 const ReleaseInfoContext = createContext<ReleaseInfoContextType | undefined>(undefined);
 

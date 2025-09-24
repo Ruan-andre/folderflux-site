@@ -2,32 +2,11 @@
 
 import Image from "next/image";
 import { Box, Link } from "@mui/material";
-
 import DownloadButton from "../DownloadButton";
 import { useReleaseInfo } from "../../contexts/ReleaseInfoContext";
-import type { ReleaseInfo } from "../../contexts/ReleaseInfoContext";
+import { getDownloadUrlFactory } from "@/functions/download";
 
 export default function Header() {
-  function getDownloadUrlFactory(releaseInfo: ReleaseInfo | null) {
-    return (os: 'windows' | 'linux' | 'other') => {
-      if (!releaseInfo) return '#';
-      if (os === 'windows') {
-        return (
-          releaseInfo.assets.find((a) => a.name.endsWith('-setup.exe'))?.browser_download_url ||
-          releaseInfo.assets.find((a) => a.name.endsWith('.exe'))?.browser_download_url ||
-          '#'
-        );
-      }
-      if (os === 'linux') {
-        return (
-          releaseInfo.assets.find((a) => a.name.endsWith('.AppImage'))?.browser_download_url ||
-          '#'
-        );
-      }
-      return '#';
-    };
-  }
-
   const { releaseInfo } = useReleaseInfo();
   return (
     <Box

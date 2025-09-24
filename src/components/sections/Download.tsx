@@ -2,6 +2,7 @@
 import { Box, CircularProgress, Container, Grid, Typography } from "@mui/material";
 import { useReleaseInfo } from "../../contexts/ReleaseInfoContext";
 import { DownloadCard } from "../DownloadCard";
+import { getDownloadUrlFactory } from "@/functions/download";
 
 const Download = () => {
   const { releaseInfo, loading, error } = useReleaseInfo();
@@ -24,26 +25,11 @@ const Download = () => {
     );
   }
 
-  const getAssetUrl = (extension: "setup" | "portable" | "appimage" | "deb") =>{
-    let response = "";
-    switch (extension) {
-      case "setup":
-        response = releaseInfo?.assets.find((asset) => asset.name.endsWith("-setup.exe"))?.browser_download_url || "#";
-        break;
-      case "portable":
-        response = releaseInfo?.assets.find((asset) => asset.name.endsWith(".exe") && !asset.name.endsWith("-setup.exe"))?.browser_download_url || "#";
-        break;
-      case "appimage":
-        response = releaseInfo?.assets.find((asset) => asset.name.endsWith(".AppImage"))?.browser_download_url || "#";
-        break;
-      case "deb":
-        response = releaseInfo?.assets.find((asset) => asset.name.endsWith(".deb"))?.browser_download_url || "#";
-        break;
-      default:
-        break;
-    }
-    return response;
-  }
+  const getAssetUrl = (extension: "setup" | "portable" | "appimage" | "deb") => {
+    const osDownloadType = { os: extension === "setup" ? "windows" : "linux", type: extension } as const;
+    const response = getDownloadUrlFactory(releaseInfo, osDownloadType).call(releaseInfo, osDownloadType.os);
+    return response.url;
+  };
 
   return (
     <Container id="download" maxWidth="md" sx={{ py: 8, mb: 6 }}>
@@ -69,13 +55,27 @@ const Download = () => {
           {new Date(releaseInfo?.published_at ?? "").toLocaleDateString("pt-BR")}
         </Typography>
         <Grid container spacing={4} sx={{ mt: 2 }} justifyContent="center" alignItems="stretch">
-          <Grid size={{ xs: 12, md: 6 }} sx={{ display: 'flex', mb: { xs: 2, md: 0 } }}>
-            <DownloadCard title="Windows" titleColor="#3a7bd5" borderColor="#3a7bd5" mainButtonLabel="Baixar Instalador" mainButtonHref={getAssetUrl("setup")}
-              secondaryButtonLabel="Versão Portátil (.exe)" secondaryButtonHref={getAssetUrl("portable")} />
+          <Grid size={{ xs: 12, md: 6 }} sx={{ display: "flex", mb: { xs: 2, md: 0 } }}>
+            <DownloadCard
+              title="Windows"
+              titleColor="#3a7bd5"
+              borderColor="#3a7bd5"
+              mainButtonLabel="Baixar Instalador"
+              mainButtonHref={getAssetUrl("setup") ?? "#"}
+              secondaryButtonLabel="Versão Portátil (.exe)"
+              secondaryButtonHref={getAssetUrl("portable") ?? "#"}
+            />
           </Grid>
-          <Grid size={{ xs: 12, md: 6 }} sx={{ display: 'flex' }}>
-            <DownloadCard title="Linux" titleColor="#00c9a7" borderColor="#00c9a7" mainButtonLabel="Baixar (.AppImage)" mainButtonHref={getAssetUrl("appimage")}
-              secondaryButtonLabel="Outros formatos (.deb)" secondaryButtonHref={getAssetUrl("deb")} />
+          <Grid size={{ xs: 12, md: 6 }} sx={{ display: "flex" }}>
+            <DownloadCard
+              title="Linux"
+              titleColor="#00c9a7"
+              borderColor="#00c9a7"
+              mainButtonLabel="Baixar (.AppImage)"
+              mainButtonHref={getAssetUrl("appimage") ?? "#"}
+              secondaryButtonLabel="Outros formatos (.deb)"
+              secondaryButtonHref={getAssetUrl("deb") ?? "#"}
+            />
           </Grid>
         </Grid>
       </Box>
